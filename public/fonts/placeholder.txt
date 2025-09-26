@@ -1,0 +1,2 @@
+Font files would typically be placed here.
+For this demo, we're using fallback fonts from the design system.
