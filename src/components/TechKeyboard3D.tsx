@@ -21,7 +21,7 @@ const timelineData: TimelineItem[] = [
     title: "Baccalauréat Sciences Mathématiques",
     institution: "Lycée Ambition, Casablanca",
     year: "2021",
-    mention: "Bien"
+    mention: ""
   },
   {
     type: 'education',

@@ -9,34 +9,22 @@ interface Interest {
 
 const interests: Interest[] = [
   {
-    name: "Swimming",
-    icon: "🏊",
-    description: "Staying fit and pushing physical limits",
+    name: "Backend Development using ASP.Net",
+    icon: "/assets/aspnet-certificate.png",
+    description: "Board Infinity • oct. 2025",
     color: "#06b6d4"
   },
   {
-    name: "Football",
-    icon: "⚽",
-    description: "Team strategy and competitive spirit",
+    name: "C# for .NET Developers",
+    icon: "/assets/csharp-certificate.png", 
+    description: "Board Infinity • août 2025",
     color: "#0891b2"
   },
   {
-    name: "Traveling",
-    icon: "🌍",
-    description: "Exploring cultures and broadening perspectives",
+    name: "Node.js & Express Backend",
+    icon: "/assets/nodejs-certificate.png",
+    description: "IBM • août 2025",
     color: "#67e8f9"
-  },
-  {
-    name: "Photography",
-    icon: "📸",
-    description: "Capturing moments and visual storytelling",
-    color: "#0ea5e9"
-  },
-  {
-    name: "Design",
-    icon: "🎨",
-    description: "Creating beautiful and functional interfaces",
-    color: "#38bdf8"
   }
 ]
 
@@ -55,17 +43,23 @@ function InterestCard({ interest, index }: { interest: Interest; index: number }
       className="relative group"
     >
       <div 
-        className="glass p-6 rounded-lg neon-glow-subtle hover:neon-glow transition-all duration-300 text-center h-full min-h-[180px] flex flex-col justify-center"
+        className="glass p-6 rounded-lg neon-glow-subtle hover:neon-glow transition-all duration-300 text-center h-full min-h-[200px] flex flex-col justify-center"
         style={{ borderColor: `${interest.color}40` }}
       >
-        <div className="text-5xl mb-4">{interest.icon}</div>
+        <div className="mb-4 flex justify-center">
+          <img 
+            src={interest.icon} 
+            alt={interest.name}
+            className="w-20 h-20 object-contain rounded-lg"
+          />
+        </div>
         <h3 
-          className="text-xl font-orbitron font-bold mb-2"
+          className="text-lg font-orbitron font-bold mb-3 leading-tight"
           style={{ color: interest.color }}
         >
           {interest.name}
         </h3>
-        <p className="text-sm text-foreground/80">
+        <p className="text-sm text-foreground/80 font-inter">
           {interest.description}
         </p>
       </div>
@@ -91,14 +85,14 @@ export default function Interests3D() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-6xl font-orbitron font-bold hologram-text mb-4">
-            Personal Interests
+            Certifications
           </h2>
           <p className="text-xl text-foreground/70 font-inter">
-            My passions beyond technology
+            Professional qualifications and achievements
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
           {interests.map((interest, index) => (
             <InterestCard key={interest.name} interest={interest} index={index} />
           ))}

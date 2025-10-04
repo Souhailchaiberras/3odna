@@ -37,7 +37,7 @@ const Index = () => {
         <TechKeyboard3D />
         <Interests3D />
         <Contact3D />
-        <ChatBot />
+        
       </div>
     </div>
   )
