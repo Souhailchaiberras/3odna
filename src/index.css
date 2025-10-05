@@ -294,4 +294,42 @@ body {
   .bg-black-200 {
     background: rgba(0, 0, 0, 0.2);
   }
+/* Add this to your globals.css or tailwind imports */
+.spline-container {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Force Spline canvas to maintain proper sizing */
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+  display: block !important;
+  max-width: 100% !important;
+}
+
+/* Container specific styles */
+#spline-container {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+}
+
+@media (max-width: 768px) {
+  #spline-container {
+    min-height: 400px;
+  }
+}
+
+@media (min-width: 1024px) {
+  #spline-container {
+    min-height: 600px;
+  }
+}
+
+@media (min-width: 1280px) {
+  #spline-container {
+    min-height: 700px;
+  }
+}
 }
