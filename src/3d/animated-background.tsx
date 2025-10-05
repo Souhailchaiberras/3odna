@@ -7,6 +7,7 @@ const Spline = React.lazy(() => import("@splinetool/react-spline"));
 import { Skill, SkillNames, SKILLS } from "@/data/constants";
 import { sleep } from "@/lib/utils";
 import { useMediaQuery } from "@/hooks/use-media-query";
+// Removed preloader import - not needed for this implementation
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -114,43 +115,10 @@ const AnimatedBackground = () => {
   const [activeSection, setActiveSection] = useState<Section>("hero");
   const splineContainer = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery("(max-width: 768px)");
-  const isTablet = useMediaQuery("(max-width: 1024px)");
+  // Removed usePreloader - not needed for this implementation
 
-  // Enhanced responsive states
   const keyboardStates = (section: Section) => {
-    if (isMobile) return STATES[section].mobile;
-    if (isTablet) {
-      // Enhanced tablet states for better scaling
-      const tabletStates = {
-        hero: {
-          scale: { x: 0.22, y: 0.22, z: 0.22 },
-          position: { x: 200, y: -180, z: 0 },
-          rotation: { x: 0, y: 0, z: 0 },
-        },
-        about: {
-          scale: { x: 0.35, y: 0.35, z: 0.35 },
-          position: { x: 0, y: -30, z: 0 },
-          rotation: { x: 0, y: Math.PI / 10, z: 0 },
-        },
-        skills: {
-          scale: { x: 0.35, y: 0.35, z: 0.35 },
-          position: { x: 0, y: -30, z: 0 },
-          rotation: { x: 0, y: Math.PI / 10, z: 0 },
-        },
-        projects: {
-          scale: { x: 0.25, y: 0.25, z: 0.25 },
-          position: { x: 0, y: 100, z: 0 },
-          rotation: { x: Math.PI, y: Math.PI / 3, z: Math.PI },
-        },
-        contact: {
-          scale: { x: 0.25, y: 0.25, z: 0.25 },
-          position: { x: 300, y: -220, z: 0 },
-          rotation: { x: 0, y: 0, z: 0 },
-        },
-      };
-      return tabletStates[section];
-    }
-    return STATES[section].desktop;
+    return isMobile ? STATES[section].mobile : STATES[section].desktop;
   };
 
   const handleMouseHover = (e: SplineEvent) => {
@@ -195,24 +163,19 @@ const AnimatedBackground = () => {
       return;
     }
     
-    // Responsive text visibility
-    if (isMobile) {
-      textDesktopDark.visible = false;
-      textDesktopLight.visible = false;
-      textMobileDark.visible = false;
-      textMobileLight.visible = true;
-    } else if (isTablet) {
+    // Default to dark theme for now
+    if (!isMobile) {
       textDesktopDark.visible = false;
       textDesktopLight.visible = true;
       textMobileDark.visible = false;
       textMobileLight.visible = false;
     } else {
       textDesktopDark.visible = false;
-      textDesktopLight.visible = true;
+      textDesktopLight.visible = false;
       textMobileDark.visible = false;
-      textMobileLight.visible = false;
+      textMobileLight.visible = true;
     }
-  }, [splineApp, isMobile, isTablet, activeSection]);
+  }, [splineApp, isMobile, activeSection]);
 
   useEffect(() => {
     if (!splineApp) return;
@@ -223,7 +186,7 @@ const AnimatedBackground = () => {
   useEffect(() => {
     if (!splineApp || isLoading) return;
     revealKeyCaps();
-  }, [splineApp, isLoading, activeSection, isMobile, isTablet]);
+  }, [splineApp, isLoading, activeSection]);
 
   const revealKeyCaps = async () => {
     if (!splineApp) return;
@@ -234,15 +197,13 @@ const AnimatedBackground = () => {
     await sleep(400);
     kbd.visible = true;
     
-    const currentState = keyboardStates(activeSection);
-    
     gsap.fromTo(
       kbd?.scale,
       { x: 0.01, y: 0.01, z: 0.01 },
       {
-        x: currentState.scale.x,
-        y: currentState.scale.y,
-        z: currentState.scale.z,
+        x: keyboardStates(activeSection).scale.x,
+        y: keyboardStates(activeSection).scale.y,
+        z: keyboardStates(activeSection).scale.z,
         duration: 1.5,
         ease: "elastic.out(1, 0.6)",
       }
@@ -285,15 +246,18 @@ const AnimatedBackground = () => {
   const handleSplineInteractions = () => {
     if (!splineApp) return;
     
+    // Handle single click events - toggle behavior
     splineApp.addEventListener("keyDown", (e) => {
       if (!splineApp) return;
       const skill = SKILLS[e.target.name as SkillNames];
       if (skill) {
+        // Toggle behavior: if same skill is already selected, deselect it
         if (selectedSkill?.name === skill.name) {
           setSelectedSkill(null);
           splineApp.setVariable("heading", "");
           splineApp.setVariable("desc", "");
         } else {
+          // Select new skill
           setSelectedSkill(skill);
           splineApp.setVariable("heading", skill.label);
           splineApp.setVariable("desc", skill.shortDescription);
@@ -301,6 +265,7 @@ const AnimatedBackground = () => {
       }
     });
     
+    // Handle hover to show skill info (but don't change selection)
     splineApp.addEventListener("mouseHover", handleMouseHover);
   };
 
@@ -309,13 +274,11 @@ const AnimatedBackground = () => {
     const kbd: SPEObject | undefined = splineApp.findObjectByName("keyboard");
     if (!kbd || !splineContainer.current) return;
     
-    const currentState = keyboardStates(activeSection);
-    
     gsap.set(kbd.scale, {
-      ...currentState.scale,
+      ...keyboardStates("hero").scale,
     });
     gsap.set(kbd.position, {
-      ...currentState.position,
+      ...keyboardStates("hero").position,
     });
 
     gsap.timeline({
@@ -326,30 +289,28 @@ const AnimatedBackground = () => {
         scrub: true,
         onEnter: () => {
           setActiveSection("skills");
-          const skillsState = keyboardStates("skills");
           gsap.to(kbd.scale, {
-            ...skillsState.scale,
+            ...keyboardStates("skills").scale,
             duration: 1,
           });
           gsap.to(kbd.position, {
-            ...skillsState.position,
+            ...keyboardStates("skills").position,
             duration: 1,
           });
           gsap.to(kbd.rotation, {
-            ...skillsState.rotation,
+            ...keyboardStates("skills").rotation,
             duration: 1,
           });
         },
         onLeaveBack: () => {
           setActiveSection("hero");
-          const heroState = keyboardStates("hero");
-          gsap.to(kbd.scale, { ...heroState.scale, duration: 1 });
+          gsap.to(kbd.scale, { ...keyboardStates("hero").scale, duration: 1 });
           gsap.to(kbd.position, {
-            ...heroState.position,
+            ...keyboardStates("hero").position,
             duration: 1,
           });
           gsap.to(kbd.rotation, {
-            ...heroState.rotation,
+            ...keyboardStates("hero").rotation,
             duration: 1,
           });
         },
@@ -359,35 +320,15 @@ const AnimatedBackground = () => {
 
   return (
     <>
-      <Suspense fallback={
-        <div className="w-full h-full flex items-center justify-center text-white text-lg">
-          Loading 3D Keyboard...
-        </div>
-      }>
-        <div 
+      <Suspense fallback={<div className="text-white text-lg">Loading 3D Keyboard...</div>}>
+        <Spline
           ref={splineContainer}
-          className="w-full h-full"
-          style={{ 
-            position: 'relative',
-            width: '100%',
-            height: '100%',
-            minHeight: '500px',
-            overflow: 'hidden'
+          onLoad={(app: Application) => {
+            setSplineApp(app);
+            setIsLoading(false);
           }}
-        >
-          <Spline
-            onLoad={(app: Application) => {
-              setSplineApp(app);
-              setIsLoading(false);
-            }}
-            scene="/assets/skills-keyboard.spline"
-            style={{
-              width: '100%',
-              height: '100%',
-              display: 'block'
-            }}
-          />
-        </div>
+          scene="/assets/skills-keyboard.spline"
+        />
       </Suspense>
     </>
   );
