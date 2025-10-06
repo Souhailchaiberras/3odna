@@ -50,7 +50,7 @@ function FloatingCard() {
               }}
               transition={{
                 duration: 3 + Math.random() * 2,
-                repeat: Infinity,
+                repeat: 0,
                 delay: Math.random() * 2
               }}
             />
@@ -91,7 +91,7 @@ export default function Hero3D() {
             Souhail Chaiberras
           </h1>
           <p className="text-xl md:text-2xl text-primary font-inter mb-2">
-            Développeur Backend Étudiant
+            Développeur Backend 
           </p>
           <p className="text-lg md:text-xl text-accent font-inter">
             Passionné DevOps
@@ -110,7 +110,7 @@ export default function Hero3D() {
           
           {/* Resume Button */}
           <motion.a
-            href="https://drive.google.com/uc?export=download&id=11b5vQNXXSSEsLRmk2IEcDK_L5J76uHh5"
+            href="https://drive.google.com/uc?export=download&id=1G8JSJDAey1VGlsFaUcjjq4CeIt7Ht2sj"
             target="_blank"
             rel="noopener noreferrer"
             whileHover={{ scale: 1.05 }}

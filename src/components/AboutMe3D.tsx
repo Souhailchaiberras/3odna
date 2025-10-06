@@ -137,9 +137,8 @@ export default function AboutMe3D() {
                 💻 Spécialisation
               </h3>
               <p className="text-foreground/80 font-inter">
-                Développeur backend en formation avec une passion pour <span className="text-primary">DevOps</span>. 
-                Je m'intéresse particulièrement à la conteneurisation, aux pipelines CI/CD, 
-                et à l'automatisation de l'infrastructure pour optimiser le déploiement logiciel.
+               Développeur backend en formation, spécialisé dans le développement avec <span className="text-primary">.NET</span> et passionné par le <span className="text-primary">DevOps</span>. J’allie mes compétences en conception backend à mon intérêt pour la conteneurisation, les pipelines CI/CD et l’automatisation afin d’optimiser le déploiement et la performance des applications.
+
               </p>
             </motion.div>
             
@@ -151,12 +150,11 @@ export default function AboutMe3D() {
               className="glass p-6 rounded-lg neon-glow-subtle"
             >
               <h3 className="text-2xl font-orbitron font-bold text-primary mb-4">
-                🌍 Travail à Distance
+                🌍 Travail en présentiel et à distance
               </h3>
               <p className="text-foreground/80 font-inter">
-                Basé au <span className="text-primary">Maroc</span>, je travaille à distance et suis disponible 
-                pour collaborer sur des projets internationaux. Passionné par la résolution 
-                de problèmes et l'automatisation des processus.
+                Basé au <span className="text-primary">Maroc</span>, je travaille en présentiel et à distance, et suis ouvert à la collaboration sur des projets internationaux. Passionné par le <span className="text-primary">DevOps</span>, la résolution de problèmes et l’automatisation des processus pour améliorer l’efficacité des systèmes backend.
+
               </p>
             </motion.div>
           </motion.div>

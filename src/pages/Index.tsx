@@ -32,9 +32,11 @@ const Index = () => {
       <div className="relative z-10" style={{ scrollBehavior: 'smooth' }}>
         <Hero3D />
         <AboutMe3D />
-        <Skills3D />
-        <Projects3D />
         <TechKeyboard3D />
+        <Projects3D />
+        <Skills3D />
+        
+        
         <Interests3D />
         <Contact3D />
         
