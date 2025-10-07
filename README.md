@@ -1,4 +1,5 @@
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 
-welcome to my profolio 
+Welcome to my portfolio
 

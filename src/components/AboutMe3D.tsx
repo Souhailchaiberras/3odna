@@ -29,10 +29,10 @@ function AboutVisual() {
           { text: "ENSA Tanger", color: "#67e8f9", delay: 0, radius: 160, ring: "inner" },
           { text: "Backend", color: "#0891b2", delay: 0.25, radius: 160, ring: "inner" },
           { text: "DevOps", color: "#06b6d4", delay: 0.5, radius: 160, ring: "inner" },
-          { text: "Automation", color: "#67e8f9", delay: 0.75, radius: 160, ring: "inner" },
-          { text: "React", color: "#0891b2", delay: 0.125, radius: 192, ring: "outer" },
-          { text: "Node.js", color: "#06b6d4", delay: 0.375, radius: 192, ring: "outer" },
-          { text: "Docker", color: "#67e8f9", delay: 0.625, radius: 192, ring: "outer" },
+          { text: "C#", color: "#67e8f9", delay: 0.75, radius: 160, ring: "inner" },
+          { text: ".Net", color: "#0891b2", delay: 0.125, radius: 192, ring: "outer" },
+          { text: "Expressjs", color: "#06b6d4", delay: 0.375, radius: 192, ring: "outer" },
+          { text: "Java", color: "#67e8f9", delay: 0.625, radius: 192, ring: "outer" },
           { text: "Git", color: "#0891b2", delay: 0.875, radius: 192, ring: "outer" }
         ].map((item, index) => (
           <motion.div
