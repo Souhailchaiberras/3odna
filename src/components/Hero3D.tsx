@@ -15,11 +15,11 @@ function FloatingCard() {
       className="relative perspective-container"
     >
       <div 
-        className={`glass rounded-lg p-8 transition-all duration-500 ${
+        className={`glass rounded-lg p-8 transition-all duration-0 ${
           hovered ? 'neon-glow' : 'neon-glow-subtle'
         } rotate-3d`}
         style={{
-          transform: 'rotateX(10deg) rotateY(10deg)',
+          transform: 'rotateX(0deg) rotateY(0deg)',
           transformStyle: 'preserve-3d'
         }}
       >
