@@ -21,6 +21,36 @@ const interests: Interest[] = [
     color: "#0891b2"
   },
   {
+    name: "Microservices and Deployment by using ASP.NET",
+    icon: "/assets/microservices-aspnet.png",
+    description: "Board Infinity • oct. 2025",
+    color: "#22d3ee"
+  },
+  {
+    name: "Coursera Lab- Jenkins for Beginners",
+    icon: "/assets/coursera-jenkins-lab.png",
+    description: "KodeKloud • nov. 2025",
+    color: "#06b6d4"
+  },
+  {
+    name: "Git Basics for DevOps",
+    icon: "/assets/git-basics.png",
+    description: "KodeKloud • nov. 2025",
+    color: "#06b6d4"
+  },
+  {
+    name: "Jenkins for Beginners",
+    icon: "/assets/jenkins-beginners.png",
+    description: "KodeKloud • nov. 2025",
+    color: "#06b6d4"
+  },
+  {
+    name: "ASP.NET for Experienced Developers",
+    icon: "/assets/aspnet-experienced.png",
+    description: "Board Infinity • oct. 2025",
+    color: "#06b6d4"
+  },
+  {
     name: "Node.js & Express Backend",
     icon: "/assets/nodejs-certificate.png",
     description: "IBM • août 2025",
