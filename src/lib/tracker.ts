@@ -81,16 +81,18 @@ export async function trackVisitor(): Promise<void> {
     const emailjs = await import("@emailjs/browser");
     emailjs.init(EMAILJS_PUBLIC_KEY);
 
-    // Geo-locate the visitor (free tier: 1,000 req/day)
+    // Geo-locate the visitor — ipwho.is supports CORS from browsers
     let country = "Unknown";
     let city = "Unknown";
 
     try {
-      const geo = await fetch("https://ipapi.co/json/", { signal: AbortSignal.timeout(4000) });
+      const geo = await fetch("https://ipwho.is/", { signal: AbortSignal.timeout(4000) });
       if (geo.ok) {
         const data = await geo.json();
-        country = `${data.country_name ?? "Unknown"} ${data.country_code ? `(${data.country_code})` : ""}`.trim();
-        city = [data.city, data.region].filter(Boolean).join(", ") || "Unknown";
+        if (data.success) {
+          country = `${data.country ?? "Unknown"} (${data.country_code ?? ""})`.trim();
+          city = [data.city, data.region].filter(Boolean).join(", ") || "Unknown";
+        }
       }
     } catch {
       // Geo failed silently — still send the rest
